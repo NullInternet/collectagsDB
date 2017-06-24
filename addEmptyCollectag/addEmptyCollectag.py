@@ -20,13 +20,15 @@ keyUser = str(sys.argv[1])
 keyCollectag = str(sys.argv[2])
 
 # Add new collectag (without tags)
-db.users.update_one(
+db.users.update(
     {"username": keyUser},
     {"$push": {
-        "collectags": {
-            "name": keyCollectag
+        "collectags":[
+            {
+                "name": keyCollectag,
+                "tags": []
             }
-        }
+        ]}
     }
 )
 
