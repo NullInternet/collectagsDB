@@ -1,6 +1,6 @@
 # Tan Tran
 # CPSC 362-01
-# 6/23/17
+# 6/25/17
 
 # addNewUser.py
 # This function creates a new user (w/o collectags)
@@ -22,7 +22,7 @@ keyUser = str(sys.argv[1])
 db.users.insert_one(
   {
     "username": keyUser,
-    "collectags": ""
+    "collectags": [ ]
   }
 )
 
