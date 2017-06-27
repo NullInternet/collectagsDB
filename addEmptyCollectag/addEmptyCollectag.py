@@ -1,5 +1,5 @@
 # Tan Tran
-# 6/23/17
+# 6/26/17
 # CPSC 362-01
 
 # addEmptyCollectag.py
@@ -20,15 +20,14 @@ keyUser = str(sys.argv[1])
 keyCollectag = str(sys.argv[2])
 
 # Add new collectag (without tags)
-db.users.update(
+db.users.update_one(
     {"username": keyUser},
     {"$push": {
-        "collectags":[
-            {
-                "name": keyCollectag,
-                "tags": []
-            }
-        ]}
+        "collectags": [{
+            "name": keyCollectag,
+            "tags": [ ]
+            }]
+        }
     }
 )
 

@@ -1,10 +1,10 @@
 # Tan Tran
 # 6/26/17
-# CPSC 362-01
+# CPSC 362-02
 
-# addCollectag.py
-# This function adds a new 'collectag' (with tags)
-# under an existing user in the Instagram database.
+# addTags.py
+# This program adds a list of user-generated tags
+# to an existing collectag under an existing user.
 
 import sys
 from pymongo import MongoClient
@@ -15,7 +15,7 @@ client = MongoClient()
 # Connect to Instagram database
 db = client.instagram
 
-# Get command line args as username and collectag name
+# Get command line args as username name
 keyUser = str(sys.argv[1])
 keyCollectag = str(sys.argv[2])
 
@@ -23,15 +23,17 @@ keyCollectag = str(sys.argv[2])
 keyTags = []
 
 sysArgID = 3
-for sysArgID in len(sys.argv):
-    keyTags.append(str(sys.argv[sysArgID]))
+for sysArgID in len(sys.argv)
+    keyTags.append(sys.argv[sysArgID])
 
-# Add new collectag (including its tags)
-db.users.update_one(
-    {"username": keyUser},
+# Add new tags to collectag
+db.users.update(
+    {"$and": [
+        {"username": keyUser},
+        {"collectags.name": keyCollectag}
+    ]},
     {"$push": {
         "collectags": [{
-            "name": keyCollectag,
             "tags": {"$each": keyTags}
             }]
         }
@@ -39,5 +41,5 @@ db.users.update_one(
 )
 
 # Print confirmation message
-print("Collectag {} added with the following tags:".format(keyCollectag))
+print("Added the following tags to collectag {}:".format(keyCollectag))
 print("{}".format(keyTags))
